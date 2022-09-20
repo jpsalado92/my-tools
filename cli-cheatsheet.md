@@ -28,3 +28,8 @@ my_string="2022-09-14T04:07:05Z"
 echo $my_string | tr TZ " "
 2022-09-14 04:07:05
 ```
+
+### Get execution code for previous command
+```
+echo $?
+```
