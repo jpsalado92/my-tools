@@ -21,6 +21,10 @@
 * [Google Docs](https://docs.google.com/document/d/1AUEaqvQVVpSGzNu1r5nN9G9gd7Y2F4ahSnRwlhpRYn0/edit): For taking notes and accessing them everywhere.
 * [Google Sheets](https://docs.google.com/spreadsheets/d/1hTZa8d5qtvuyCc9dWp6Sm-L-qZRQpSjhMqsyJ1XbAJ8/edit#gid=0): For storing table like info and accessing it everywhere.
 
+## Security
+
+* [Virustotal](https://www.virustotal.com/gui/home/upload): Analyse suspicious files, domains, IPs and URLs to detect malware and other breaches, automatically share them with the security community.
+
 ## Coding
 
 * [regex101](https://regex101.com/): Regular expression tester with syntax highlighting, explanation, cheat sheet for PHP/PCRE, Python, GO, JavaScript, Java, C#/. NET.
