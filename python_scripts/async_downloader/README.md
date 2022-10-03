@@ -1,0 +1,1 @@
+Should work just fine from python 3.9 on.
