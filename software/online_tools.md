@@ -17,7 +17,7 @@
 
 ## Organizing
 
-* [diagrams.net](https://app.diagrams.net/): Easily create flow diagrams online.
+* [shubhamgrg04 / awesome-diagramming](https://github.com/shubhamgrg04/awesome-diagramming): A curated list of awesome diagramming tools available for software engineering teams. Feel free to contribute to this on-going list.
 * [Google Docs](https://docs.google.com/document/d/1AUEaqvQVVpSGzNu1r5nN9G9gd7Y2F4ahSnRwlhpRYn0/edit): For taking notes and accessing them everywhere.
 * [Google Sheets](https://docs.google.com/spreadsheets/d/1hTZa8d5qtvuyCc9dWp6Sm-L-qZRQpSjhMqsyJ1XbAJ8/edit#gid=0): For storing table like info and accessing it everywhere.
 
