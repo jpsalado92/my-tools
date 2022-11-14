@@ -8,6 +8,26 @@
 echo $?
 ```
 
+## The `awk` command
+
+It is a program that can be used to select particular records in a file and perform operations upon them.
+
+The basic function of `awk` is to search files for lines (or other units of text) that contain certain patterns. When a line matches one of the patterns, `awk` performs specified actions on that line. `awk` continues to process input lines in this way until it reaches the end of the input files.
+
+The program consists of a series of rules. Each rule specifies one pattern to search for and one action to perform upon finding the pattern.
+
+Syntactically, a rule consists of a pattern followed by an action. The action is enclosed in braces to separate it from the pattern. Newlines usually separate rules. Therefore, an awk program looks like this:
+
+```
+pattern { action }
+pattern { action }
+…
+```
+
+?awk '{print $2}
+
+Source: https://www.gnu.org/software/gawk/manual/gawk.html#Getting-Started
+
 ## The `cut` command
 
 Given a file or standard output **with one or more lines**, the `cut` command allows the user to print selected parts of lines from each input to standard output. It will work in the following scenarios:
