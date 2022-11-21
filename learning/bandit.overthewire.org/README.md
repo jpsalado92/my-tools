@@ -398,7 +398,7 @@ ssh bandit15@bandit.labs.overthewire.org -p 2220
 password: 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt'
 ```
 
-> **Hint:** The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. 
+> **Hint:** The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
 
 > **Helpful note:** Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
 
@@ -479,7 +479,6 @@ vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----"
 ```
 
-
 ## [Bandit Level 17 → Level 18](https://overthewire.org/wargames/bandit/bandit18.html)
 
 ```bash
@@ -502,7 +501,6 @@ $ diff passwords.old passwords.new
 > hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
 ```
 
-
 ## [Bandit Level 18 → Level 19](https://overthewire.org/wargames/bandit/bandit19.html)
 
 ```bash
@@ -522,6 +520,7 @@ $ ls
 $ cat readme
 > awhqfNnAbc1naukrpqDYcF95h7HoMTrC
 ```
+
 ## [Bandit Level 19 → Level 20](https://overthewire.org/wargames/bandit/bandit20.html)
 
 ```bash
@@ -555,13 +554,48 @@ password: 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT'
 Code to answer:
 
 ```bash
+$ ./suconnect
+"Usage: ./suconnect <portnumber>
+This program will connect to the given port on localhost using TCP. If it receives the correct password from the other side, the next password is transmitted back."
+
+$ screen
+$ C-a |
+$ C-a tab
+$ C-a c
+$ nc -l 1234
+$ C-a tab
+$ ./suconnect 1234
+(paste password: VxCazJaVykI6W36BkBU0mJTCM8rR95XT)
+NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
 ```
 
+> **Key-Takeaways:**
+>
+> The `screen` utility is  a full-screen window manager that multiplexes a physical terminal between several processes (typically interactive shells). It is very useful for dealing with multiple windows. Pressing `C-a` (in windows ctrl+A) and later a command, one can:
+>
+> * `C-a c`: Open and enter a new window.
+> * `C-a digit`: Switch to window number 0-9.
+> * `C-a C-a`: Get back to previous window.
+> * `C-a |`: Split the current region vertically into two new vertical regions.
+> * `C-a tab`: Switch the input focus to the next region.
 
+## [Bandit Level 21 → Level 22](https://overthewire.org/wargames/bandit/bandit22.html)
 
+```bash
+ssh bandit21@bandit.labs.overthewire.org -p 2220
+password: 'NvEJF7oVjkddltPSrdKEFOllh9V1IBcq'
+```
 
+> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+> **Possible commands:** `cron, crontab, crontab(5)` (use “man 5 crontab” to access this)
+
+Code to answer:
+
+```bash
+```
 
 ___
+
 ## [Bandit Level 20 → Level 21](https://overthewire.org/wargames/bandit/bandit21.html)
 
 ```bash
