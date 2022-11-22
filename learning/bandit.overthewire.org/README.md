@@ -364,9 +364,9 @@ password: 'wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw'
 Code to answer:
 
 ```bash
-$ cat sshkey.private
-$ ssh --help
-$ ssh bandit14@localhost -p 2220 -i sshkey.private
+cat sshkey.private
+ssh --help
+ssh bandit14@localhost -p 2220 -i sshkey.private
 ```
 
 ## [Bandit Level 14 → Level 15](https://overthewire.org/wargames/bandit/bandit15.html)
@@ -587,11 +587,115 @@ password: 'NvEJF7oVjkddltPSrdKEFOllh9V1IBcq'
 ```
 
 > **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+
 > **Possible commands:** `cron, crontab, crontab(5)` (use “man 5 crontab” to access this)
 
 Code to answer:
 
 ```bash
+$ man cron
+$ ls /etc/cron.d/
+$ cat cronjob_bandit22
+@reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+* * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
+$ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
+WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+```
+
+> **Key-Takeaways:** In cron `* * * * *` means every minute of every day of every week of every month.
+
+## [Bandit Level 22 → Level 23](https://overthewire.org/wargames/bandit/bandit23.html)
+
+```bash
+ssh bandit22@bandit.labs.overthewire.org -p 2220
+password: 'WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff'
+```
+
+> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+>
+> **NOTE:** Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
+
+Code to answer:
+
+```bash
+$ cd /etc/cron.d/
+$ cat cronjob_bandit23
+'@reboot bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null
+* * * * * bandit23 /usr/bin/cronjob_bandit23.sh  &> /dev/null'
+$ cat /usr/bin/cronjob_bandit23.sh
+'#!/bin/bash
+myname=$(whoami)
+mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
+echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
+cat /etc/bandit_pass/$myname > /tmp/$mytarget'
+$ echo I am user bandit22 | md5sum | cut -d ' ' -f 1
+8169b67bd894ddbb4412f91573b38db3
+$ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
+QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+```
+
+## [Bandit Level 23 → Level 24](https://overthewire.org/wargames/bandit/bandit24.html)
+
+```bash
+ssh bandit23@bandit.labs.overthewire.org -p 2220
+password: 'QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G'
+```
+
+> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
+>
+>**NOTE:** This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
+>
+>**NOTE 2:** Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
+
+Code to answer:
+
+```bash
+$ cd /etc/cron.d/
+$ cat cronjob_bandit24
+'@reboot bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null
+* * * * * bandit24 /usr/bin/cronjob_bandit24.sh &> /dev/null'
+$ cat /usr/bin/cronjob_bandit24.sh
+'#!/bin/bash
+
+myname=$(whoami)
+cd /var/spool/$myname/foo
+echo "Executing and deleting all scripts in /var/spool/$myname/foo:"
+for i in * .*;
+do
+    if [ "$i" != "." -a "$i" != ".." ];
+    then
+        echo "Handling $i"
+        owner="$(stat --format "%U" ./$i)"
+        if [ "${owner}" = "bandit23" ]; then
+            timeout -s 9 60 ./$i
+        fi
+        rm -f ./$i
+    fi
+done'
+
+
+$ touch /tmp/my_pass
+$ chmod 777 /tmp/my_pass
+$ cd /var/spool/bandit24/foo
+$ vim my_script.sh
+```
+
+Put the folowing content:
+
+```bash
+#!/bin/bash
+cat /etc/bandit_pass/bandit24 > /tmp/my_pass
+```
+
+```bash
+chmod 777 /var/spool/bandit24/foo/my_script.sh
+```
+
+After a minute...
+
+```bash
+$ cat /tmp/my_pass
+VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
 ```
 
 ___
