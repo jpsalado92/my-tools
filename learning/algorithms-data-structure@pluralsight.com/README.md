@@ -4,9 +4,9 @@
 
 **Asymptotic analysis** or **complexity analysis** is the measurement of how the inputs of an algorithm affect the behavior of the algorithm, as they inputs approach some limit.
 
-Big O notation represents the upper limit or worst-case-scenario of an algorithms cost, and just as Big O represents the higher bound of an algorithm, Big Omega represents the lower bound.
+**Big O** notation represents the upper limit or worst-case-scenario of an algorithms cost, and just as Big O represents the higher bound of an algorithm, **Big Omega** represents the lower bound.
 
-Values that do not change the overall shape of the curve are ignored.
+When writing Big O, values that do not change the overall shape of the curve are ignored.:
 
 ```
 O(n+1) = O(n)
@@ -23,3 +23,12 @@ Common cases:
 
 > Note that Big O represents the worst case scenario, but there are more cases!
 > For example, the quicksort algorithm has a worst-case-scenario cost of O(n^2), but its average cost is O(nlogn)
+
+## Linked lists
+
+* **Linked list:** Data structure in which data is stored in nodes consisting of a single data item and a reference to the next node.
+
+* **Singly linked list:** A linked list that provides forward iteration from the start to the end of the list.
+* **Doubly linked list:** A linked list that provides forward iteration from the start to the end of the list, and reverse iteration, from end to start.
+
+* **Sorted linked list:** A doubly linked list where the values are inserted and stored in sort-order.
