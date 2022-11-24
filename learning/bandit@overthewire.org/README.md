@@ -824,9 +824,98 @@ ssh bandit27@bandit.labs.overthewire.org -p 2220
 password: 'YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS'
 ```
 
-> **Hint:** There is a git repository at ssh://bandit27-git@localhost/home/bandit27-git/repo.  The password for the user bandit27-git is the same as for the user bandit27. Clone the repository and find the password for the next level.
+> **Hint:** There is a git repository at `ssh://bandit27-git@localhost/home/bandit27-git/repo`.  The password for the user bandit27-git is the same as for the user bandit27. Clone the repository and find the password for the next level.
 
 > **Possible commands:** `git`
+
+Code to answer:
+
+```bash
+$ cd /tmp
+$ mktemp -d
+/tmp/tmp.j6pVgG0iEt
+$ cd /tmp/tmp.j6pVgG0iEt
+$ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
+$ cd repo
+$ cat README
+The password to the next level is: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+```
+
+## [Bandit Level 28 → Level 29](https://overthewire.org/wargames/bandit/bandit29.html)
+
+```bash
+ssh bandit28@bandit.labs.overthewire.org -p 2220
+password: 'AVanL161y9rsbcJIsFHuw35rjaOM19nR'
+```
+
+> **Hint:** There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
+
+> **Possible commands:** `git`
+
+Code to answer:
+
+```bash
+$ cd /tmp
+$ mktemp -d
+/tmp/tmp.j6pVgG0iEt
+$ cd /tmp/tmp.j6pVgG0iEt
+$ git clone ssh://bandit28-git@localhost:2220/home/bandit28-git/repo
+$ cd repo
+$ cat README.md
+"
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: xxxxxxxxxx
+"
+$ git log
+"
+commit 43032edb2fb868dea2ceda9cb3882b2c336c09ec (HEAD -> master, origin/master, origin/HEAD)
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Sep 1 06:30:25 2022 +0000
+
+    fix info leak
+
+commit bdf3099fb1fb05faa29e80ea79d9db1e29d6c9b9
+Author: Morla Porla <morla@overthewire.org>
+Date:   Thu Sep 1 06:30:25 2022 +0000
+
+    add missing data
+
+commit 43d032b360b700e881e490fbbd2eee9eccd7919e
+Author: Ben Dover <noone@overthewire.org>
+Date:   Thu Sep 1 06:30:24 2022 +0000
+
+    initial commit of README.md
+"
+$ git checkout bdf3099fb1fb05faa29e80ea79d9db1e29d6c9b9
+$ cat README.md
+"
+# Bandit Notes
+Some notes for level29 of bandit.
+
+## credentials
+
+- username: bandit29
+- password: tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S
+"
+```
+
+## [Bandit Level 29 → Level 0](https://overthewire.org/wargames/bandit/bandit30.html)
+
+```bash
+ssh bandit29@bandit.labs.overthewire.org -p 2220
+password: 'tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S'
+```
+
+> **Hint:** There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+
+> **NOTE:** Try connecting to your own network daemon to see if it works as you think
+
+> **Possible commands:** `ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)`
 
 Code to answer:
 
