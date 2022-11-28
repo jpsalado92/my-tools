@@ -904,18 +904,148 @@ Some notes for level29 of bandit.
 "
 ```
 
-## [Bandit Level 29 → Level 0](https://overthewire.org/wargames/bandit/bandit30.html)
+## [Bandit Level 29 → Level 30](https://overthewire.org/wargames/bandit/bandit30.html)
 
 ```bash
 ssh bandit29@bandit.labs.overthewire.org -p 2220
 password: 'tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S'
 ```
 
-> **Hint:** There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
+> **Hint:** There is a git repository at `ssh://bandit29-git@localhost/home/bandit29-git/repo`. The password for the user bandit29-git is the same as for the user bandit29. Clone the repository and find the password for the next level.
 
-> **NOTE:** Try connecting to your own network daemon to see if it works as you think
+> **Possible commands:** `git`
 
-> **Possible commands:** `ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)`
+Code to answer:
+
+```bash
+$ mktemp -d /tmp/
+/tmp/tmp.XE5GnF5qS2
+$ cd /tmp/tmp.XE5GnF5qS2
+$ git clone ssh://bandit29-git@localhost:2220/home/bandit29-git/repo
+$ cd repo$
+$ cat README.md
+"
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: <no passwords in production!>
+"
+$ git branch --all
+* master
+  remotes/origin/HEAD -> origin/master
+  remotes/origin/dev
+  remotes/origin/master
+  remotes/origin/sploits-dev
+$ git switch dev
+$ cat README.md
+"
+# Bandit Notes
+Some notes for bandit30 of bandit.
+
+## credentials
+
+- username: bandit30
+- password: xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS
+"
+```
+
+## [Bandit Level 30 → Level 31](https://overthewire.org/wargames/bandit/bandit31.html)
+
+```bash
+ssh bandit30@bandit.labs.overthewire.org -p 2220
+password: 'xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS'
+```
+
+> **Hint:** There is a git repository at `ssh://bandit30-git@localhost/home/bandit30-git/repo`. The password for the user bandit30-git is the same as for the user bandit30. Clone the repository and find the password for the next level.
+
+> **Possible commands:** `git`
+
+Code to answer:
+
+```bash
+$ mktemp -d /tmp/
+/tmp/tmp.ULsl4sbSTY
+$ cd /tmp/tmp.ULsl4sbSTY
+$ git clone ssh://bandit30-git@localhost:2220/home/bandit30-git/repo
+$ cd repo$
+$ cat README.md
+"just an epmty file... muahaha"
+$ git show-ref --tags
+$ git cat-file -p 831aac2e2341f009e40e46392a4f5dd318483019
+"OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt"
+```
+
+> **Key-Takeaway:**
+>
+> * `git show-ref`: List references in a local repository.
+> * `git cat-file`: Provide content or type and size information for repository objects.
+
+## [Bandit Level 31 → Level 32](https://overthewire.org/wargames/bandit/bandit32.html)
+
+```bash
+ssh bandit31@bandit.labs.overthewire.org -p 2220
+password: 'OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt'
+```
+
+> **Hint:** There is a git repository at `ssh://bandit31-git@localhost/home/bandit31-git/repo`. The password for the user bandit31-git is the same as for the user bandit31. Clone the repository and find the password for the next level.
+
+> **Possible commands:** `git`
+
+Code to answer:
+
+```bash
+$ mktemp -d
+/tmp/tmp.XwqJevh0V1
+$ cd /tmp/tmp.XwqJevh0V1
+$ git clone ssh://bandit31-git@localhost:2220/home/bandit31-git/repo
+$ cd repo
+$ cat README.md
+"
+This time your task is to push a file to the remote repository.
+
+Details:
+    File name: key.txt
+    Content: 'May I come in?'
+    Branch: master
+"
+$ echo 'May I come in?' > key.txt
+$ git add key.txt
+"The following paths are ignored by one of your .gitignore files:
+key.txt"
+$ cat .gitignore
+"*.txt"
+$ rm .gitignore
+$ git add key.txt
+$ commit -m "my commit"
+$ git push
+"
+[...]
+remote: ### Attempting to validate files... ####
+remote:
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote:
+remote: Well done! Here is the password for the next level:
+remote: rmCBvG56y58BXzv98yZGdO7ATVL5dW8y
+remote:
+remote: .oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.oOo.
+remote:
+[...]
+"
+```
+
+## [Bandit Level 32 → Level 33](https://overthewire.org/wargames/bandit/bandit33.html)
+
+```bash
+ssh bandit32@bandit.labs.overthewire.org -p 2220
+password: 'rmCBvG56y58BXzv98yZGdO7ATVL5dW8y'
+```
+
+> **Hint:** After all this git stuff its time for another escape. Good luck!
+
+> **Possible commands:** `sh, man`
 
 Code to answer:
 
