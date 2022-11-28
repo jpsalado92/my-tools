@@ -32,3 +32,9 @@ Common cases:
 * **Doubly linked list:** A linked list that provides forward iteration from the start to the end of the list, and reverse iteration, from end to start.
 
 * **Sorted linked list:** A doubly linked list where the values are inserted and stored in sort-order.
+
+## Stacks and Queues
+
+* **Stack:** It is a data structure that works as a last in first out (LIFO) container. Think of a stack of plates.
+* **Queues:** It is a data structure that works as a lirst in first out (FIFO) data structure. Think of it as a queue of persons. The first element in the queue is the "head" and the last is the "tail". Whenever a new element is included it is called **enqueuing** and whenever an item is processed it is called **dequeuing**.
+* **Dequeue:** Deque or Double Ended Queue is a type of queue in which insertion and removal of elements can either be performed from the front or the rear.
