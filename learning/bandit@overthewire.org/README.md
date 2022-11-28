@@ -1050,22 +1050,27 @@ password: 'rmCBvG56y58BXzv98yZGdO7ATVL5dW8y'
 Code to answer:
 
 ```bash
+$ $0 # Executes bash
+$ cd
+$ cat /etc/bandit_pass/bandit33
+odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
 ```
 
-___
-
-## [Bandit Level 20 → Level 21](https://overthewire.org/wargames/bandit/bandit21.html)
+## [Bandit Level 33 → Level 34](https://overthewire.org/wargames/bandit/bandit34.html)
 
 ```bash
-ssh bandit20@bandit.labs.overthewire.org -p 2220
-password: ''
-```
+ssh bandit33@bandit.labs.overthewire.org -p 2220
+password: 'odHo63fHiFqcWWJG9rLiLDtPm45KzUKy'
 
-> **Hint:**
+$ ls
+README.txt
+$ cat README.txt
+"Congratulations on solving the last level of this game!
 
-> **Possible commands:** ``
+At this moment, there are no more levels to play in this game. However, we are constantly working
+on new levels and will most likely expand this game with more levels soon.
+Keep an eye out for an announcement on our usual communication channels!
+In the meantime, you could play some of our other wargames.
 
-Code to answer:
-
-```bash
+If you have an idea for an awesome new level, please let us know!"
 ```
