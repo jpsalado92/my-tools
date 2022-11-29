@@ -1,96 +1,97 @@
 # Solving [Bandit@overthewire.org](https://overthewire.org/wargames/bandit/)
 
-## [Bandit Level 0 → Level 1](https://overthewire.org/wargames/bandit/bandit1.html)
+## [Level 0](https://overthewire.org/wargames/bandit/bandit0.html)
+
+**Level Goal:** The goal of this level is for you to log into the game using SSH. The host to which you need to connect is bandit.labs.overthewire.org, on port 2220. The username is bandit0 and the password is bandit0. Once logged in, go to the Level 1 page to find out how to beat Level 1. ( `ssh` )
 
 ```bash
 ssh bandit0@bandit.labs.overthewire.org -p 2220
 password: bandit0
 ```
 
-Code to answer:
+## [Level 0 → Level 1](https://overthewire.org/wargames/bandit/bandit1.html)
+
+**Level Goal:** The password for the next level is stored in a file called readme located in the home directory. Use this password to log into bandit1 using SSH. Whenever you find a password for a level, use SSH (on port 2220) to log into that level and continue the game. ( `ls, cd, cat, file, du, find` )
+
+> `ssh bandit0@bandit.labs.overthewire.org -p 2220` with password `bandit0`
 
 ```bash
 $ ls
 readme
-
 $ cat readme
-NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
+'NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL'
 ```
 
-## [Bandit Level 1 → Level 2](https://overthewire.org/wargames/bandit/bandit2.html)
+## [Level 1 → Level 2](https://overthewire.org/wargames/bandit/bandit2.html)
 
-```bash
-ssh bandit1@bandit.labs.overthewire.org -p 2220
-password: NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL
-```
+**Level Goal:** The password for the next level is stored in a file called - located in the home directory. ( `ls, cd, cat, file, du, find` )
 
-Code to answer:
+> `ssh bandit1@bandit.labs.overthewire.org -p 2220` with password `NH2SXQwcBdpmTEzi3bvBHMM9H66vVXjL`
 
 ```bash
 $ ls
 -
-
 $ cat ./-
 rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
+
+# Other ways
+$ cat /home/bandit1/-
+$ cat /home/bandit1/*
+$ cat $(pwd)/-
 ```
 
-## [Bandit Level 2 → Level 3](https://overthewire.org/wargames/bandit/bandit3.html)
+> **Key-Takeaways:**
+>
+> * Use `*` in the path to apply the same command to multiple targets.
+> * Encapsule commands in `$(command)` like structures to concatenate the outputs of the command to other stuff.
 
-```bash
-ssh bandit2@bandit.labs.overthewire.org -p 2220
-password: rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi
-```
+## [Level 2 → Level 3](https://overthewire.org/wargames/bandit/bandit3.html)
 
-Code to answer:
+**Level Goal:** The password for the next level is stored in a file called spaces in this filename located in the home directory. ( `ls, cd, cat, file, du, find` )
+
+> `ssh bandit2@bandit.labs.overthewire.org -p 2220` with password `rRGizSaX8Mk1RTb1CNQoXTcYZWU6lgzi`
 
 ```bash
 $ ls
-spaces in this filename
-
+'spaces in this filename'
 $ cat spaces\ in\ this\ filename
 aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
+
+# Other ways
+$ cat 'spaces in this filename'
+$ cat sp*
+$ cat *ame
+$ cat *this*
+$ cat *
 ```
 
-## [Bandit Level 3 → Level 4](https://overthewire.org/wargames/bandit/bandit4.html)
+## [Level 3 → Level 4](https://overthewire.org/wargames/bandit/bandit4.html)
+
+**Level Goal:** The password for the next level is stored in a hidden file in the inhere directory. ( `ls, cd, cat, file, du, find` )
+
+> `ssh bandit3@bandit.labs.overthewire.org -p 2220` with password `aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG`
 
 ```bash
-ssh bandit3@bandit.labs.overthewire.org -p 2220
-password: aBZ0W5EmUfAf7kHTQeOwd8bauFJ2lAiG
-```
-
-Code to answer:
-
-```bash
-~$ ls
-inhere
-
-~$ cd inhere/
-
-~/inhere$ ls
-
-~/inhere$ ls -la
+$ ls
+'inhere'
+$ ls inhere/ -la
 total 12
 drwxr-xr-x 2 root    root    4096 Sep  1 06:30 .
 drwxr-xr-x 3 root    root    4096 Sep  1 06:30 ..
 -rw-r----- 1 bandit4 bandit3   33 Sep  1 06:30 .hidden
 
-~/inhere$ cat .hidden
-2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
+$ cat .hidden
+'2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe'
 ```
 
-## [Bandit Level 4 → Level 5](https://overthewire.org/wargames/bandit/bandit5.html)
+## [Level 4 → Level 5](https://overthewire.org/wargames/bandit/bandit5.html)
+
+> `ssh bandit4@bandit.labs.overthewire.org -p 2220` with password `2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe`
+
+**Level Goal:** The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command. ( `ls, cd, cat, file, du, find` )
 
 ```bash
-ssh bandit4@bandit.labs.overthewire.org -p 2220
-password: 2EW7BBsr6aMMoJ2HjW067dm8EgX26xNe
-```
-
-> **Hint:** The password for the next level is stored in the only human-readable file in the inhere directory. Tip: if your terminal is messed up, try the “reset” command.
-
-Code to answer:
-
-```bash
-~$ file ./inhere/*
+$ file ./inhere/*
 ./inhere/-file00: OpenPGP Public Key
 ./inhere/-file01: data
 ./inhere/-file02: data
@@ -102,28 +103,23 @@ Code to answer:
 ./inhere/-file08: data
 ./inhere/-file09: data
 
-~$ cat ./inhere/-file07
-lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
+$ cat ./inhere/-file07
+'lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR'
 ```
 
-> **Key-Takeaway:** Use the `file` command to display the type of the passed
+> **Key-Takeaway:** Use the `file` command to display the type of  file(s)
 
-## [Bandit Level 5 → Level 6](https://overthewire.org/wargames/bandit/bandit6.html)
+## [Level 5 → Level 6](https://overthewire.org/wargames/bandit/bandit6.html)
 
-```bash
-ssh bandit5@bandit.labs.overthewire.org -p 2220
-password: lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR
-```
+> `ssh bandit5@bandit.labs.overthewire.org -p 2220` with password `lrIWWI6bB37kxfiCQZqUdOIYfr6eEeqR`
 
-> **Hint:** The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
+**Level Goal:** The password for the next level is stored in a file somewhere under the inhere directory and has all of the following properties:
 
-```
-human-readable
-1033 bytes in size
-not executable
-```
+* human-readable
+* 1033 bytes in size
+* not executable
 
-Code to answer:
+( `ls, cd, cat, file, du, find` )
 
 ```bash
 # In order to learn more about options
@@ -131,8 +127,8 @@ Code to answer:
 ~$ man find | grep exe
 ~$ man find | grep readable
 
-~/inhere$ find . -size 1033c -type f -readable | xargs cat | xargs
-P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
+$ find . -size 1033c -type f -readable | xargs cat | xargs
+'P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU'
 ```
 
 > **Key-Takeaways:**
@@ -145,32 +141,26 @@ P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
 > * Use `!` before an option to complement it.
 > * Pipe `xargs` to apply an operation to the output of the previous one. Concatenated removes the spaces of the final output.
 
-## [Bandit Level 6 → Level 7](https://overthewire.org/wargames/bandit/bandit7.html)
+## [Level 6 → Level 7](https://overthewire.org/wargames/bandit/bandit7.html)
 
-```bash
-ssh bandit6@bandit.labs.overthewire.org -p 2220
-password: P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU
-```
+> `ssh bandit6@bandit.labs.overthewire.org -p 2220` with password `P4L4vucdmLnm8I7Vl7jG1ApGSfjYKqJU`
 
-> **Hint:** The password for the next level is stored somewhere on the server and has all of the following properties:
+**Level Goal:** The password for the next level is stored somewhere on the server and has all of the following properties:
 
-```
-owned by user bandit7
-owned by group bandit6
-33 bytes in size
-```
+* owned by user bandit7
+* owned by group bandit6
+* 33 bytes in size
 
-Code to answer:
+( `ls, cd, cat, file, du, find, grep` )
 
 ```bash
 # In order to learn more about options
 
-~$ man find | grep user
-~$ man find | grep group
-~$ man find | grep readable
-
-~$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null | xargs cat
-z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+$ man find | grep user
+$ man find | grep group
+$ man find | grep readable
+$ find / -size 33c -user bandit7 -group bandit6 2>/dev/null | xargs cat
+'z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S'
 ```
 
 > **Key-Takeaways:**
@@ -178,98 +168,74 @@ z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
 > * Use `find . -user <USER_NAME>` to look for files owned by a user.
 > * Use `find . -group <GROUP_NAME>` to look for files owned by a group.
 > * Use `2>/dev/null` to redirect errors to dev null (kind of like a black hole).
+> * Use `2>&1` to redirect errors to stdin.
+> * Use `>/dev/null 2>&1` to avoid verbosity only redirecting errors to stdin.
+>
+## [Level 7 → Level 8](https://overthewire.org/wargames/bandit/bandit8.html)
 
-## [Bandit Level 7 → Level 8](https://overthewire.org/wargames/bandit/bandit8.html)
+> `ssh bandit7@bandit.labs.overthewire.org -p 2220` with password `z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S`
+
+**Level Goal:** The password for the next level is stored in the file data.txt next to the word millionth. ( `man, grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd` )
 
 ```bash
-ssh bandit7@bandit.labs.overthewire.org -p 2220
-password: z7WtoNQU2XfjmMtWA8u5rN4vzqu4v99S
+$ grep '/millionth'/ data.txt | awk '{print $2}'
+'millionth TESKZC0XvTetK0S9xNwm25STk5iWrBvP'
+
+# Other way
+$ awk '/millionth'/ data.txt | awk '{print $2}'
 ```
 
-> **Hint:** The password for the next level is stored in the file **data.txt** next to the word **millionth**.
+> **Key-Takeaway:** Use `awk '{print $2}'` to print the second argument of the output.
 
-Code to answer:
+## [Level 8 → Level 9](https://overthewire.org/wargames/bandit/bandit9.html)
 
-```bash
-~$ cat data.txt | grep millionth
-TESKZC0XvTetK0S9xNwm25STk5iWrBvP
-```
+> `ssh bandit8@bandit.labs.overthewire.org -p 2220` with password `TESKZC0XvTetK0S9xNwm25STk5iWrBvP`
 
-## [Bandit Level 8 → Level 9](https://overthewire.org/wargames/bandit/bandit9.html)
+**Level Goal:** The password for the next level is stored in the file data.txt and is the only line of text that occurs only once. ( `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd` )
 
 ```bash
-ssh bandit8@bandit.labs.overthewire.org -p 2220
-password: TESKZC0XvTetK0S9xNwm25STk5iWrBvP
-```
-
-> **Hint:** The password for the next level is stored in the file **data.txt** and is the only line of text that occurs **only once**.
-
-Code to answer:
-
-```bash
-~$ sort data.txt | uniq -u
-EN632PlfYiZbn3PhVK3XOGSlNInNE00t
+$ sort data.txt | uniq -u
+'EN632PlfYiZbn3PhVK3XOGSlNInNE00t'
 ```
 
 > **Key-Takeaway:** `uniq -u` takes care of adjacent duplicates, with the `-u` option, it outputs only unique lines
 
-## [Bandit Level 9 → Level 10](https://overthewire.org/wargames/bandit/bandit10.html)
+## [Level 9 → Level 10](https://overthewire.org/wargames/bandit/bandit10.html)
 
-```bash
-ssh bandit9@bandit.labs.overthewire.org -p 2220
-password: EN632PlfYiZbn3PhVK3XOGSlNInNE00t
-```
+> `ssh bandit9@bandit.labs.overthewire.org -p 2220` with password `EN632PlfYiZbn3PhVK3XOGSlNInNE00t`
 
-> **Hint:** The password for the next level is stored in the file **data.txt** in one of the few human-readable strings, preceded by several ‘=’ characters.
-
-> **Possible commands:** `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
-
-Code to answer:
+**Level Goal:** The password for the next level is stored in the file data.txt in one of the few human-readable strings, preceded by several ‘=’ characters. ( `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd` )
 
 ```bash
 ~$ strings data.txt | grep ==
-========== the
+"========== the
 bu========== password
 4iu========== is
 b~==P
-========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+========== G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s"
 ```
 
 > **Key-Takeaway:** `strings` prints the printable character sequences that are at least 4 characters long (or the number given with the options below) and are followed by an unprintable character.
 
-## [Bandit Level 10 → Level 11](https://overthewire.org/wargames/bandit/bandit11.html)
+## [Level 10 → Level 11](https://overthewire.org/wargames/bandit/bandit11.html)
+
+> `ssh bandit10@bandit.labs.overthewire.org -p 2220` with password `G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s`
+
+**Level Goal:** The password for the next level is stored in the file data.txt, which contains base64 encoded data. ( `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd` )
 
 ```bash
-ssh bandit10@bandit.labs.overthewire.org -p 2220
-password: G7w8LIi6J3kTb8A7j9LgrywtEUlyyp6s
+$ base64 -d data.txt
+'The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM'
 ```
 
-> **Hint:** The password for the next level is stored in the file data.txt, which contains base64 encoded data.
+## [Level 11 → Level 12](https://overthewire.org/wargames/bandit/bandit12.html)
 
-> **Possible commands:** `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
+> `ssh bandit11@bandit.labs.overthewire.org -p 2220` with password `6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM`
 
-Code to answer:
-
-```bash
-~$ base64 -d data.txt
-The password is 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
-```
-
-## [Bandit Level 11 → Level 12](https://overthewire.org/wargames/bandit/bandit12.html)
+**Level Goal:** The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions. (`grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd` )
 
 ```bash
-ssh bandit11@bandit.labs.overthewire.org -p 2220
-password: 6zPeziLdR2RKNdNYFNb6nVCKzphlXHBM
-```
-
-> **Hint:** The password for the next level is stored in the file data.txt, where all lowercase (a-z) and uppercase (A-Z) letters have been rotated by 13 positions.
-
-> **Possible commands:** `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd`
-
-Code to answer:
-
-```bash
-~$ cat data.txt | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
+$ cat data.txt | tr '[A-Za-z]' '[N-ZA-Mn-za-m]'
 The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 ```
 
@@ -279,18 +245,11 @@ The password is JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
 > * For upper case cases, we got 13 rotation using. "Map from A-Z to N-ZA-M"
 > * For lower case cases, the same was performed by. "Map from a-z to n-za-m"
 
-## [Bandit Level 12 → Level 13](https://overthewire.org/wargames/bandit/bandit13.html)
+## [Level 12 → Level 13](https://overthewire.org/wargames/bandit/bandit13.html)
 
-```bash
-ssh bandit12@bandit.labs.overthewire.org -p 2220
-password: JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv
-```
+> `ssh bandit12@bandit.labs.overthewire.org -p 2220` with password `JVNBBFSmZwKKOP0XbFXOoW8chDz5yVRv`
 
-> **Hint:** The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!).
-
-> **Possible commands:** `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file`
-
-Code to answer:
+**Level Goal:** The password for the next level is stored in the file data.txt, which is a hexdump of a file that has been repeatedly compressed. For this level it may be useful to create a directory under /tmp in which you can work using mkdir. For example: mkdir /tmp/myname123. Then copy the datafile using cp, and rename it using mv (read the manpages!). ( `grep, sort, uniq, strings, base64, tr, tar, gzip, bzip2, xxd, mkdir, cp, mv, file` )
 
 ```bash
 $ man xxd | grep hexdump
@@ -348,88 +307,58 @@ $ cat data8
 'The password is wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw'
 ```
 
-## [Bandit Level 13 → Level 14](https://overthewire.org/wargames/bandit/bandit14.html)
+## [Level 13 → Level 14](https://overthewire.org/wargames/bandit/bandit14.html)
+
+> `ssh bandit13@bandit.labs.overthewire.org -p 2220` with password `wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw`
+
+**Level Goal:** The password for the next level is stored in `/etc/bandit_pass/bandit14` and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level. ( `ssh, telnet, nc, openssl, s_client, nmap` )
 
 ```bash
-ssh bandit13@bandit.labs.overthewire.org -p 2220
-password: 'wbWdlBxEir4CaE8LaPhauuOo6pwRmrDw'
-```
-
-> **Hint:** The password for the next level is stored in `/etc/bandit_pass/bandit14` and can only be read by user bandit14. For this level, you don’t get the next password, but you get a private SSH key that can be used to log into the next level.
-
-> **Note:** localhost is a hostname that refers to the machine you are working on.
-
-> **Possible commands:** `ssh, telnet, nc, openssl, s_client, nmap`
-
-Code to answer:
-
-```bash
-cat sshkey.private
-ssh --help
-ssh bandit14@localhost -p 2220 -i sshkey.private
-```
-
-## [Bandit Level 14 → Level 15](https://overthewire.org/wargames/bandit/bandit15.html)
-
-```bash
-ssh bandit14@bandit.labs.overthewire.org -p 2220
-password: 'fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq'
-```
-
-> **Hint:** The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost.
-
-> **Possible commands:** `ssh, telnet, nc, openssl, s_client, nmap`
-
-Code to answer:
-
-```bash
+$ ssh bandit14@localhost -p 2220 -i sshkey.private
 $ cat /etc/bandit_pass/bandit14
 'fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq'
-$ man nc localhost  30000 < fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq
+```
+
+## [Level 14 → Level 15](https://overthewire.org/wargames/bandit/bandit15.html)
+
+> `ssh bandit14@bandit.labs.overthewire.org -p 2220` with password `fGrHPx402xGC7U7rXKDaxiWFTOiF0ENq`
+
+**Level Goal:** The password for the next level can be retrieved by submitting the password of the current level to port 30000 on localhost. ( `ssh, telnet, nc, openssl, s_client, nmap` )
+
+```bash
 $ cat /etc/bandit_pass/bandit14 | nc localhost 30000
 "Correct!"
 "jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt"
 ```
 
-## [Bandit Level 15 → Level 16](https://overthewire.org/wargames/bandit/bandit16.html)
+## [Level 15 → Level 16](https://overthewire.org/wargames/bandit/bandit16.html)
+
+> `ssh bandit15@bandit.labs.overthewire.org -p 2220` with password `jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt`
+
+**Level Goal:** The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption. ( `ssh, telnet, nc, openssl, s_client, nmap` )
 
 ```bash
-ssh bandit15@bandit.labs.overthewire.org -p 2220
-password: 'jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt'
-```
-
-> **Hint:** The password for the next level can be retrieved by submitting the password of the current level to port 30001 on localhost using SSL encryption.
-
-> **Helpful note:** Getting “HEARTBEATING” and “Read R BLOCK”? Use -ign_eof and read the “CONNECTED COMMANDS” section in the manpage. Next to ‘R’ and ‘Q’, the ‘B’ command also works in this version of that command…
-
-> **Possible commands:** `ssh, telnet, nc, openssl, s_client, nmap`
-
-```bash
-
 $ man telnet | grep ssl  # Doesn't give matches
 $ man ssh | grep ssl  -C 5  # Doesn't give interesting matches
 $ man nmap | grep ssl -C 5  # Doesn't give interesting matches
 $ man openssl-s_client # That's it
 $ openssl s_client -host localhost -port 30001
+"
 > ---
 > read R BLOCK
+"
 jN2kgmIXJ6fShzhT2avhotn4Zcka6tnt
+"
 > Correct!
 > JQttfApK4SeyHwDlI9SXGR50qclOAil1
+"
 ```
 
-## [Bandit Level 16 → Level 17](https://overthewire.org/wargames/bandit/bandit17.html)
+## [Level 16 → Level 17](https://overthewire.org/wargames/bandit/bandit17.html)
 
-```bash
-ssh bandit16@bandit.labs.overthewire.org -p 2220
-password: 'JQttfApK4SeyHwDlI9SXGR50qclOAil1'
-```
+> `ssh bandit16@bandit.labs.overthewire.org -p 2220` with password `JQttfApK4SeyHwDlI9SXGR50qclOAil1`
 
-> **Hint:** The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it.
-
-> **Possible commands:** `ssh, telnet, nc, openssl, s_client, nmap`
-
-Code to answer:
+**Level Goal:** The credentials for the next level can be retrieved by submitting the password of the current level to a port on localhost in the range 31000 to 32000. First find out which of these ports have a server listening on them. Then find out which of those speak SSL and which don’t. There is only 1 server that will give the next credentials, the others will simply send back to you whatever you send to it. ( `ssh, telnet, nc, openssl, s_client, nmap` )
 
 ```bash
 $ nmap localhost -p 31000-32000
@@ -479,79 +408,50 @@ vBgsyi/sN3RqRBcGU40fOoZyfAMT8s1m/uYv52O6IgeuZ/ujbjY=
 -----END RSA PRIVATE KEY-----"
 ```
 
-## [Bandit Level 17 → Level 18](https://overthewire.org/wargames/bandit/bandit18.html)
+## [Level 17 → Level 18](https://overthewire.org/wargames/bandit/bandit18.html)
 
-```bash
-ssh bandit17@bandit.labs.overthewire.org -p 2220 -i lvl18.pem
-```
+> `ssh bandit17@bandit.labs.overthewire.org -p 2220 -i lvl18.pem`
 
-> **Hint:** There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new
-
-> **NOTE:** if you have solved this level and see ‘Byebye!’ when trying to log into bandit18, this is related to the next level, bandit19
-
-> **Possible commands:** `cat, grep, ls, diff`
-
-Code to answer:
+**Level Goal:** There are 2 files in the homedirectory: passwords.old and passwords.new. The password for the next level is in passwords.new and is the only line that has been changed between passwords.old and passwords.new. ( `cat, grep, ls, diff` )
 
 ```bash
 $ diff passwords.old passwords.new
-42c42
+"42c42
 < 09wUIyMU4YhOzl1Lzxoz0voIBzZ2TUAf
 ---
-> hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg
+> hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg"
 ```
 
-## [Bandit Level 18 → Level 19](https://overthewire.org/wargames/bandit/bandit19.html)
+## [Level 18 → Level 19](https://overthewire.org/wargames/bandit/bandit19.html)
 
-```bash
-ssh bandit18@bandit.labs.overthewire.org -p 2220
-password: 'hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg'
-```
+> `ssh bandit18@bandit.labs.overthewire.org -p 2220` with password `hga5tuuCLF6fFzUpnagiMN8ssu9LFrdg`
 
-> **Hint:** The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH.
-
-> **Possible commands:** `ssh, ls, cat`
-
-Code to answer:
+**Level Goal:** The password for the next level is stored in a file readme in the homedirectory. Unfortunately, someone has modified .bashrc to log you out when you log in with SSH. ( `ssh, ls, cat` )
 
 ```bash
 ssh bandit18@bandit.labs.overthewire.org -p 2220 bash
 $ ls
 $ cat readme
-> awhqfNnAbc1naukrpqDYcF95h7HoMTrC
+'awhqfNnAbc1naukrpqDYcF95h7HoMTrC'
 ```
 
-## [Bandit Level 19 → Level 20](https://overthewire.org/wargames/bandit/bandit20.html)
+## [Level 19 → Level 20](https://overthewire.org/wargames/bandit/bandit20.html)
 
-```bash
-ssh bandit19@bandit.labs.overthewire.org -p 2220
-password: 'awhqfNnAbc1naukrpqDYcF95h7HoMTrC'
-```
+> `ssh bandit19@bandit.labs.overthewire.org -p 2220` with password `awhqfNnAbc1naukrpqDYcF95h7HoMTrC`
 
-> **Hint:** To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
-
-Code to answer:
+**Level Goal:** To gain access to the next level, you should use the setuid binary in the homedirectory. Execute it without arguments to find out how to use it. The password for this level can be found in the usual place (/etc/bandit_pass), after you have used the setuid binary.
 
 ```bash
 $ ./bandit20-do
 $ ./bandit20-do cat /etc/bandit_pass/bandit20
-> VxCazJaVykI6W36BkBU0mJTCM8rR95XT
+'VxCazJaVykI6W36BkBU0mJTCM8rR95XT'
 ```
 
-## [Bandit Level 20 → Level 21](https://overthewire.org/wargames/bandit/bandit21.html)
+## [Level 20 → Level 21](https://overthewire.org/wargames/bandit/bandit21.html)
 
-```bash
-ssh bandit20@bandit.labs.overthewire.org -p 2220
-password: 'VxCazJaVykI6W36BkBU0mJTCM8rR95XT'
-```
+> `ssh bandit20@bandit.labs.overthewire.org -p 2220` with password `VxCazJaVykI6W36BkBU0mJTCM8rR95XT`
 
-> **Hint:** There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21).
-
-> **NOTE:** Try connecting to your own network daemon to see if it works as you think.
-
-> **Possible commands:** `ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)`
-
-Code to answer:
+**Level Goal:** There is a setuid binary in the homedirectory that does the following: it makes a connection to localhost on the port you specify as a commandline argument. It then reads a line of text from the connection and compares it to the password in the previous level (bandit20). If the password is correct, it will transmit the password for the next level (bandit21). ( `ssh, nc, cat, bash, screen, tmux, Unix ‘job control’ (bg, fg, jobs, &, CTRL-Z, …)` )
 
 ```bash
 $ ./suconnect
@@ -573,24 +473,17 @@ NvEJF7oVjkddltPSrdKEFOllh9V1IBcq
 >
 > The `screen` utility is  a full-screen window manager that multiplexes a physical terminal between several processes (typically interactive shells). It is very useful for dealing with multiple windows. Pressing `C-a` (in windows ctrl+A) and later a command, one can:
 >
-> * `C-a c`: Open and enter a new window.
-> * `C-a digit`: Switch to window number 0-9.
-> * `C-a C-a`: Get back to previous window.
-> * `C-a |`: Split the current region vertically into two new vertical regions.
-> * `C-a tab`: Switch the input focus to the next region.
+> * `C-a c` : Open and enter a new window.
+> * `C-a digit` : Switch to window number 0-9.
+> * `C-a C-a` : Get back to previous window.
+> * `C-a |` : Split the current region vertically into two new vertical regions.
+> * `C-a tab` : Switch the input focus to the next region.
 
-## [Bandit Level 21 → Level 22](https://overthewire.org/wargames/bandit/bandit22.html)
+## [Level 21 → Level 22](https://overthewire.org/wargames/bandit/bandit22.html)
 
-```bash
-ssh bandit21@bandit.labs.overthewire.org -p 2220
-password: 'NvEJF7oVjkddltPSrdKEFOllh9V1IBcq'
-```
+> `ssh bandit21@bandit.labs.overthewire.org -p 2220` with password `NvEJF7oVjkddltPSrdKEFOllh9V1IBcq`
 
-> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
-
-> **Possible commands:** `cron, crontab, crontab(5)` (use “man 5 crontab” to access this)
-
-Code to answer:
+**Level Goal:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed. ( `cron, crontab, crontab(5)` )
 
 ```bash
 $ man cron
@@ -599,23 +492,16 @@ $ cat cronjob_bandit22
 @reboot bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
 * * * * * bandit22 /usr/bin/cronjob_bandit22.sh &> /dev/null
 $ cat /tmp/t7O6lds9S0RqQh9aMcz6ShpAoZKF7fgv
-WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff
+'WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff'
 ```
 
 > **Key-Takeaways:** In cron `* * * * *` means every minute of every day of every week of every month.
 
-## [Bandit Level 22 → Level 23](https://overthewire.org/wargames/bandit/bandit23.html)
+## [Level 22 → Level 23](https://overthewire.org/wargames/bandit/bandit23.html)
 
-```bash
-ssh bandit22@bandit.labs.overthewire.org -p 2220
-password: 'WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff'
-```
+> `ssh bandit22@bandit.labs.overthewire.org -p 2220` with password `WdDozAdTM2z9DiFEQ2mGlwngMfj4EZff`
 
-> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
->
-> **NOTE:** Looking at shell scripts written by other people is a very useful skill. The script for this level is intentionally made easy to read. If you are having problems understanding what it does, try executing it to see the debug information it prints.
-
-Code to answer:
+**Level Goal:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
 
 ```bash
 $ cd /etc/cron.d/
@@ -629,25 +515,16 @@ mytarget=$(echo I am user $myname | md5sum | cut -d ' ' -f 1)
 echo "Copying passwordfile /etc/bandit_pass/$myname to /tmp/$mytarget"
 cat /etc/bandit_pass/$myname > /tmp/$mytarget'
 $ echo I am user bandit22 | md5sum | cut -d ' ' -f 1
-8169b67bd894ddbb4412f91573b38db3
+'8169b67bd894ddbb4412f91573b38db3'
 $ cat /tmp/8ca319486bfbbc3663ea0fbe81326349
-QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G
+'QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G'
 ```
 
-## [Bandit Level 23 → Level 24](https://overthewire.org/wargames/bandit/bandit24.html)
+## [Level 23 → Level 24](https://overthewire.org/wargames/bandit/bandit24.html)
 
-```bash
-ssh bandit23@bandit.labs.overthewire.org -p 2220
-password: 'QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G'
-```
+> `ssh bandit23@bandit.labs.overthewire.org -p 2220` with password `QYw0Y2aiA672PsMmh9puTQuhoz8SyR2G`
 
-> **Hint:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed.
->
->**NOTE:** This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
->
->**NOTE 2:** Keep in mind that your shell script is removed once executed, so you may want to keep a copy around…
-
-Code to answer:
+**Level Goal:** A program is running automatically at regular intervals from cron, the time-based job scheduler. Look in /etc/cron.d/ for the configuration and see what command is being executed. **NOTE:** This level requires you to create your own first shell-script. This is a very big step and you should be proud of yourself when you beat this level!
 
 ```bash
 $ cd /etc/cron.d/
@@ -673,7 +550,6 @@ do
     fi
 done'
 
-
 $ touch /tmp/my_pass
 $ chmod 777 /tmp/my_pass
 $ cd /var/spool/bandit24/foo
@@ -697,19 +573,14 @@ After a minute...
 
 ```bash
 $ cat /tmp/my_pass
-VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar
+'VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar'
 ```
 
-## [Bandit Level 24 → Level 25](https://overthewire.org/wargames/bandit/bandit25.html)
+## [Level 24 → Level 25](https://overthewire.org/wargames/bandit/bandit25.html)
 
-```bash
-ssh bandit24@bandit.labs.overthewire.org -p 2220
-password: 'VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar'
-```
+> `ssh bandit24@bandit.labs.overthewire.org -p 2220` with password `VAfGXJ1PBSsPSnvsjI8p759leLZ9GGar`
 
-> **Hint:** A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
-
-Code to answer:
+**Level Goal:** A daemon is listening on port 30002 and will give you the password for bandit25 if given the password for bandit24 and a secret numeric 4-digit pincode. There is no way to retrieve the pincode except by going through all of the 10000 combinations, called brute-forcing.
 
 ```bash
 $ nc localhost 30002
@@ -731,18 +602,11 @@ Correct!
 The password of user bandit25 is p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d'
 ```
 
-## [Bandit Level 25 → Level 26](https://overthewire.org/wargames/bandit/bandit26.html)
+## [Level 25 → Level 26](https://overthewire.org/wargames/bandit/bandit26.html)
 
-```bash
-ssh bandit25@bandit.labs.overthewire.org -p 2220
-password: 'p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d'
-```
+> `ssh bandit25@bandit.labs.overthewire.org -p 2220` with password `p7TaowMYrmu23Ol8hiZh9UvD0O9hpx8d`
 
-> **Hint:** Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it.
-
-> **Possible commands:** `ssh, cat, more, vi, ls, id, pwd`
-
-Code to answer:
+**Level Goal:** Logging in to bandit26 from bandit25 should be fairly easy… The shell for user bandit26 is not /bin/bash, but something else. Find out what it is, how it works and how to break out of it. ( `ssh, cat, more, vi, ls, id, pwd` )
 
 ```bash
 $ ssh bandit26@bandit.labs.overthewire.org -p 2220 -i bandit26.sshkey
@@ -796,14 +660,11 @@ For getting into the bash.
 
 > **Key-Takeaway:** The text file `passwd` at `/etc` stores user account information required during login. It contains a list of the system’s accounts, giving for each account some useful information like user ID, group ID, home directory, shell, and more.
 
-## [Bandit Level 26 → Level 27](https://overthewire.org/wargames/bandit/bandit27.html)
+## [Level 26 → Level 27](https://overthewire.org/wargames/bandit/bandit27.html)
 
-```bash
-ssh bandit26@bandit.labs.overthewire.org -p 2220
-password: 'c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1'
-```
+> `ssh bandit26@bandit.labs.overthewire.org -p 2220` with password `c7GvcKlw9mC7aUQaPx7nwFstuAIBw1o1`
 
-> **Hint:** Good job getting a shell! Now hurry and grab the password for bandit27!
+**Level Goal:** Good job getting a shell! Now hurry and grab the password for bandit27!
 
 The solution consists on getting the terminal window small enough so `more` has to paginate the output of what is inside the text file. Then, press `v` and put the following
 
@@ -817,42 +678,32 @@ $ ./bandit27-do cat /etc/bandit_pass/bandit27
 'YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS'
 ```
 
-## [Bandit Level 27 → Level 28](https://overthewire.org/wargames/bandit/bandit28.html)
+## [Level 27 → Level 28](https://overthewire.org/wargames/bandit/bandit28.html)
 
-```bash
-ssh bandit27@bandit.labs.overthewire.org -p 2220
-password: 'YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS'
-```
+> `ssh bandit27@bandit.labs.overthewire.org -p 2220` with password `YnQpBuifNMas1hcUFk70ZmqkhUU2EuaS`
 
-> **Hint:** There is a git repository at `ssh://bandit27-git@localhost/home/bandit27-git/repo`.  The password for the user bandit27-git is the same as for the user bandit27. Clone the repository and find the password for the next level.
+**Level Goal:** There is a git repository at `ssh://bandit27-git@localhost/home/bandit27-git/repo` .  The password for the user bandit27-git is the same as for the user bandit27. Clone the repository and find the password for the next level.
 
 > **Possible commands:** `git`
-
-Code to answer:
 
 ```bash
 $ cd /tmp
 $ mktemp -d
-/tmp/tmp.j6pVgG0iEt
+'/tmp/tmp.j6pVgG0iEt'
 $ cd /tmp/tmp.j6pVgG0iEt
 $ git clone ssh://bandit27-git@localhost:2220/home/bandit27-git/repo
 $ cd repo
 $ cat README
-The password to the next level is: AVanL161y9rsbcJIsFHuw35rjaOM19nR
+'The password to the next level is: AVanL161y9rsbcJIsFHuw35rjaOM19nR'
 ```
 
-## [Bandit Level 28 → Level 29](https://overthewire.org/wargames/bandit/bandit29.html)
+## [Level 28 → Level 29](https://overthewire.org/wargames/bandit/bandit29.html)
 
-```bash
-ssh bandit28@bandit.labs.overthewire.org -p 2220
-password: 'AVanL161y9rsbcJIsFHuw35rjaOM19nR'
-```
+> `ssh bandit28@bandit.labs.overthewire.org -p 2220` with password `AVanL161y9rsbcJIsFHuw35rjaOM19nR`
 
-> **Hint:** There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
+**Level Goal:** There is a git repository at ssh://bandit28-git@localhost/home/bandit28-git/repo. The password for the user bandit28-git is the same as for the user bandit28.
 
 > **Possible commands:** `git`
-
-Code to answer:
 
 ```bash
 $ cd /tmp
@@ -904,18 +755,13 @@ Some notes for level29 of bandit.
 "
 ```
 
-## [Bandit Level 29 → Level 30](https://overthewire.org/wargames/bandit/bandit30.html)
+## [Level 29 → Level 30](https://overthewire.org/wargames/bandit/bandit30.html)
 
-```bash
-ssh bandit29@bandit.labs.overthewire.org -p 2220
-password: 'tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S'
-```
+> `ssh bandit29@bandit.labs.overthewire.org -p 2220` with password `tQKvmcwNYcFS6vmPHIUSI3ShmsrQZK8S`
 
-> **Hint:** There is a git repository at `ssh://bandit29-git@localhost/home/bandit29-git/repo`. The password for the user bandit29-git is the same as for the user bandit29. Clone the repository and find the password for the next level.
+**Level Goal:** There is a git repository at `ssh://bandit29-git@localhost/home/bandit29-git/repo` . The password for the user bandit29-git is the same as for the user bandit29. Clone the repository and find the password for the next level.
 
 > **Possible commands:** `git`
-
-Code to answer:
 
 ```bash
 $ mktemp -d /tmp/
@@ -952,18 +798,13 @@ Some notes for bandit30 of bandit.
 "
 ```
 
-## [Bandit Level 30 → Level 31](https://overthewire.org/wargames/bandit/bandit31.html)
+## [Level 30 → Level 31](https://overthewire.org/wargames/bandit/bandit31.html)
 
-```bash
-ssh bandit30@bandit.labs.overthewire.org -p 2220
-password: 'xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS'
-```
+> `ssh bandit30@bandit.labs.overthewire.org -p 2220` with password `xbhV3HpNGlTIdnjUrdAlPzc2L6y9EOnS`
 
-> **Hint:** There is a git repository at `ssh://bandit30-git@localhost/home/bandit30-git/repo`. The password for the user bandit30-git is the same as for the user bandit30. Clone the repository and find the password for the next level.
+**Level Goal:** There is a git repository at `ssh://bandit30-git@localhost/home/bandit30-git/repo` . The password for the user bandit30-git is the same as for the user bandit30. Clone the repository and find the password for the next level.
 
 > **Possible commands:** `git`
-
-Code to answer:
 
 ```bash
 $ mktemp -d /tmp/
@@ -980,21 +821,16 @@ $ git cat-file -p 831aac2e2341f009e40e46392a4f5dd318483019
 
 > **Key-Takeaway:**
 >
-> * `git show-ref`: List references in a local repository.
-> * `git cat-file`: Provide content or type and size information for repository objects.
+> * `git show-ref` : List references in a local repository.
+> * `git cat-file` : Provide content or type and size information for repository objects.
 
-## [Bandit Level 31 → Level 32](https://overthewire.org/wargames/bandit/bandit32.html)
+## [Level 31 → Level 32](https://overthewire.org/wargames/bandit/bandit32.html)
 
-```bash
-ssh bandit31@bandit.labs.overthewire.org -p 2220
-password: 'OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt'
-```
+> `ssh bandit31@bandit.labs.overthewire.org -p 2220` with password `OoffzGDlzhAlerFJ2cAiz1D41JW1Mhmt`
 
-> **Hint:** There is a git repository at `ssh://bandit31-git@localhost/home/bandit31-git/repo`. The password for the user bandit31-git is the same as for the user bandit31. Clone the repository and find the password for the next level.
+**Level Goal:** There is a git repository at `ssh://bandit31-git@localhost/home/bandit31-git/repo` . The password for the user bandit31-git is the same as for the user bandit31. Clone the repository and find the password for the next level.
 
 > **Possible commands:** `git`
-
-Code to answer:
 
 ```bash
 $ mktemp -d
@@ -1036,32 +872,24 @@ remote:
 "
 ```
 
-## [Bandit Level 32 → Level 33](https://overthewire.org/wargames/bandit/bandit33.html)
+## [Level 32 → Level 33](https://overthewire.org/wargames/bandit/bandit33.html)
 
-```bash
-ssh bandit32@bandit.labs.overthewire.org -p 2220
-password: 'rmCBvG56y58BXzv98yZGdO7ATVL5dW8y'
-```
+> `ssh bandit32@bandit.labs.overthewire.org -p 2220` with password `rmCBvG56y58BXzv98yZGdO7ATVL5dW8y`
 
-> **Hint:** After all this git stuff its time for another escape. Good luck!
-
-> **Possible commands:** `sh, man`
-
-Code to answer:
+**Level Goal:** After all this git stuff its time for another escape. Good luck! ( `sh, man` )
 
 ```bash
 $ $0 # Executes bash
 $ cd
 $ cat /etc/bandit_pass/bandit33
-odHo63fHiFqcWWJG9rLiLDtPm45KzUKy
+'odHo63fHiFqcWWJG9rLiLDtPm45KzUKy'
 ```
 
-## [Bandit Level 33 → Level 34](https://overthewire.org/wargames/bandit/bandit34.html)
+## [Level 33 → Level 34](https://overthewire.org/wargames/bandit/bandit34.html)
+
+> `ssh bandit33@bandit.labs.overthewire.org -p 2220` with password `odHo63fHiFqcWWJG9rLiLDtPm45KzUKy`
 
 ```bash
-ssh bandit33@bandit.labs.overthewire.org -p 2220
-password: 'odHo63fHiFqcWWJG9rLiLDtPm45KzUKy'
-
 $ ls
 README.txt
 $ cat README.txt
