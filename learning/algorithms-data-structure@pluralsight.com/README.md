@@ -10,6 +10,13 @@
     - [Associative Array](#associative-array)
     - [Hash algorithm](#hash-algorithm)
     - [Hash tables](#hash-tables)
+  - [Sorting and searching Array Data](#sorting-and-searching-array-data)
+    - [What is sorting?](#what-is-sorting)
+    - [Bubble sort](#bubble-sort)
+    - [Insertion sort](#insertion-sort)
+    - [Merge sort](#merge-sort)
+    - [Quick sort](#quick-sort)
+    - [Searching](#searching)
   - [TODO Balanced Tree](#todo-balanced-tree)
 
 ## Asymptotic analysis of algorithms
@@ -151,6 +158,104 @@ How a hash table grows:
 2. Use the growth factor to allocate a larger array.
 3. Determine the new index for the existing items in the hash table. (Modulo of hash result against the new array length).
 4. Update the hash table to use the new array.
+
+## Sorting and searching Array Data
+
+### What is sorting?
+
+In sorting we can have:
+* **Comparisons**: Comparing two elements of the array to understand which goes first.
+* **Swaps**: Exchanging the place of two elements of the array according to the comparison.
+
+When measuring the cost of sorting, we talk about the number of comparisons and swaps to be performed using big O notation.
+
+### Bubble sort
+
+1. **Iteration**: Visit each item of the array from start to end.
+2. **Swap**: If two neighboring items are out of order, swap them.
+3. **Repeat**: Repeat this process until array is sorted.
+
+**Performance:**
+* Best: `O(n)`
+* Average: `O(n^2)`
+* Worst: `O(n^2)`
+
+### Insertion sort
+
+1. **Iteration**: Visit each item of the array from start to end.
+2. **Compare**: Find out of order neighboring items.
+3. **Shift and insert**: Find the insertion point, shift, and insert.
+
+**Performance:**
+* Best: `O(n)`
+* Average: `O(n^2)`
+* Worst: `O(n^2)`
+
+> **Advantages:**
+> * Works well when data is nearly sorted.
+> * Requires only O(1) additional memory.
+> * Sorting can happen as data is received.
+
+### Merge sort
+
+1. **Split**: Split the array into sub-arrays of a single item.
+2. **Compare**:Compare the individual items.
+3. **Merge**: Merge the items into a sorted array.
+
+![merge-sort](merge-sort.png)
+
+**Performance:**
+
+* Best: `O(n log(n))`
+* Average: `O(n log(n))`
+* Worst: `O(n log(n))`
+
+> **To consider:**
+> * **Divide and Conquer**: Reduces the problem down to the most basic form.
+> * **Memory Requirements**: Requires O(n) additional memory.
+> * **Stable**: Equal items retain their relative position. 
+
+### Quick sort
+
+Pivot value: A pivot value is a point in an array where all the values to the left of the pivot are less than (or equal to) the pivot value, and all the values to the right are greater. In order to select it:
+
+* Select the first/last item of the array. (Not a good approach as it works bad in presorted cases)
+* Pick a random value of the array.
+* Select the median of the first, last and middle items.
+
+![quicksort](quicksort.gif)
+
+1. **Pivot**: Pick the pivot value in the array.
+2. **Partition**: Reorder the elements around the pivot point.
+3. **Repeat**: Repeat for each partition.
+
+**Performance:**
+
+* Best: `O(n log(n))`
+* Average: `O(n log(n))`
+* Worst: `O(n^2)`
+
+> **To consider:**
+> * **Divide and Conquer**: Reduces the problem down to the most basic form.
+> * **Memory Requirements**: Requires only O(log(n)) additional memory.
+> * **Optimizable**: Some optimizations can led to improved performance.
+
+### Searching
+
+**Linear search**
+
+Scan the array, from start to end, comparing each array item against the value being sought.
+
+Performance: `O(n)`
+
+**Binary search**
+
+1. Started with a sorted array, check the middle array value.
+2. If the value is a match then the value has been found.
+3. If the value is greater than the sought value, repeat this process for the values to the left.
+4. Otherwise, repeat the process for the values to the right.
+
+Performance: `O(log(n))`
 
 ## TODO Balanced Tree
 
