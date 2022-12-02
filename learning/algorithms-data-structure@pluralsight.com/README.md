@@ -5,6 +5,10 @@
   - [Stacks and Queues](#stacks-and-queues)
   - [Binary Trees](#binary-trees)
     - [Binary Search Tree](#binary-search-tree)
+    - [Unbalanced Trees](#unbalanced-trees)
+    - [Fully Unbalanced Trees](#fully-unbalanced-trees)
+    - [Balanced Tree](#balanced-tree)
+    - [AVL Tree](#avl-tree)
     - [Tree traversals](#tree-traversals)
   - [Hashing algorithms and tables](#hashing-algorithms-and-tables)
     - [Associative Array](#associative-array)
@@ -17,7 +21,9 @@
     - [Merge sort](#merge-sort)
     - [Quick sort](#quick-sort)
     - [Searching](#searching)
-  - [TODO Balanced Tree](#todo-balanced-tree)
+  - [String searching algorithms](#string-searching-algorithms)
+    - [Naive search algorithm](#naive-search-algorithm)
+    - [Boyer-Moore-Horspool algorithm](#boyer-moore-horspool-algorithm)
 
 ## Asymptotic analysis of algorithms
 
@@ -72,7 +78,7 @@ Tree properties:
 * They are recursively defined, meaning that you can think that trees contain other trees inside.
 * Every node is connected to each other by **edges**.
 * We call **internal nodes** to those that are neither the leaf or root node.
-* The **height of the node** is the maximum number of edges between that node and a leaf.
+* The **height of the node** is the maximum number of edges between that node and a leaf. The **height of the tree** is calculated from leaf to root.
 * The **level of the node** is 1 plus the number of edges between that node and the root.
 
 Binary tree properties:
@@ -88,6 +94,56 @@ It is a binary tree where nodes with lesser values are placed to the left of the
 > This property is what distinguishes a binary tree from a binary search tree.
 
 Insertion/Search/Removal in a BST normally has an average time complexity of `O(log(n))` , but in some corner cases (imagine inserting values from lowest to greatest) it is `O(n)` .
+
+### Unbalanced Trees
+
+A tree whose left and right children have a difference of height >1 heights.
+
+### Fully Unbalanced Trees
+
+Tree which behaves as a linked list, with `O(n)` time complexity.
+
+### Balanced Tree
+
+A binary search tree whose maximum height is minimized.
+
+The root node has roughly the same number of on the right and left side.
+The height of both children is the same.
+
+**Balance factor**: The difference between the height of the right and left sub-trees.
+
+**Heavy node**: The state when the balance factor of a node differs by more than one. 
+
+### AVL Tree
+
+A self balancing binary tree. Named after the inventors Georgy Andelson-Velsky and Evgenii Landis.
+Rotations
+
+**Left rotation:** Algorithm to balance a right-heavy tree by rotating nodes to the left.
+
+1. Right child becomes the new root.
+2. Left child of the new root is assigned to the right child of the old root.
+3. The previous root becomes the new root's left child.
+TODO Add GIF
+
+**Right rotation:** Algorithm to balance a left-heavy tree by rotating nodes to the right.
+1. Left child becomes the new root.
+2. Right child of the new root is assigned to the left child of the old root.
+3. The previous root becomes the new root's right child.
+TODO Add GIF
+
+**Left-right rotation:**
+1. Left rotate the left child
+2. Right rotate the root of the unbalanced subtree
+TODO Add GIF
+
+**Right-left rotation:**
+1. Right rotate the right child
+2. Left rotate the root of the unbalanced subtree
+
+[TODO Add GIF]
+
+[TODO Add rotation method table]
 
 ### Tree traversals
 
@@ -257,7 +313,39 @@ Performance: `O(n)`
 
 Performance: `O(log(n))`
 
-## TODO Balanced Tree
+## String searching algorithms
 
-The root node has roughly the same number of on the right and left side.
-The height of both children is the same.
+### Naive search algorithm
+
+Go letter by letter comparing to the start of the pattern to match.
+If it matches, check the rest of the letters until either:
+* No letter match, continue with the following letter that started the search
+* Letter match, if it is a full word match bingo, if partial match, keep checking.
+
+**Performance**:
+
+* Average `O(n+m)`
+* Worst case `O(nm)`
+
+Note `n` is the length of the input and `` the length of the pattern
+
+> Requires no preprocessing, good for small inputs.
+
+### Boyer-Moore-Horspool algorithm
+
+A 2-stage searching algorithm that uses a table that contains the length to shift when a bad match occurs.
+
+![boyer-moore-horspool](boyer-moore-horspool.gif)
+
+**Example:**
+
+**Stage 1**: Preprocess the pattern to build a bad match table.
+
+**Stage 2**: The pattern is searched right-to-left using the bad match table to skip ahead at a mismatch.
+
+![boyer-moore-horspool](boyer-moore-horspool-2.gif)
+
+**Performance**:
+
+* Average `O(n)`
+* Worst case `O(nm)`
