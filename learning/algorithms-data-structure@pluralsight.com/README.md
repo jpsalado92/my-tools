@@ -24,6 +24,15 @@
   - [String searching algorithms](#string-searching-algorithms)
     - [Naive search algorithm](#naive-search-algorithm)
     - [Boyer-Moore-Horspool algorithm](#boyer-moore-horspool-algorithm)
+  - [Sets](#sets)
+  - [B trees](#b-trees)
+    - [Minimal degree "T"](#minimal-degree-t)
+    - [Definitions](#definitions)
+    - [Properties \[TODO REVIEW\]](#properties-todo-review)
+    - [Examples](#examples)
+    - [Searching in a B tree](#searching-in-a-b-tree)
+    - [Adding items in a B tree](#adding-items-in-a-b-tree)
+    - [Removing items in a B tree](#removing-items-in-a-b-tree)
 
 ## Asymptotic analysis of algorithms
 
@@ -349,3 +358,111 @@ A 2-stage searching algorithm that uses a table that contains the length to shif
 
 * Average `O(n)`
 * Worst case `O(nm)`
+
+## Sets
+
+A data structure that stores unique values in an undetermined order.
+
+**Properties**
+
+* Contains only distinct items. (Like set of integer numbers)
+* Items are iterated in an implementation-defined order.
+* Insert, search, delete `O(log(n))` complexity
+
+Sets are mainly used to **perform algebra operations** between them, like:
+
+* **Intersection**:
+  + The set of items that exist within all input sets.
+  + Answers the `X AND Y` question.
+* **Union**:
+  + The set of all distinct items that exist within any of the input sets.
+  + Answers the `X OR Y` question.
+* **Difference**:
+  + The set of items which exist in one set which do not exist in the other.
+  + The order of inputs matter.
+  + Answers the `X BUT NOT Y` question.
+* **Symmetric difference**:
+  + The set of items which exist in either of the two input sets, but which are not in their intersection.
+  + Answers the `X OR Y BUT NOT BOTH` question.
+
+![set-operations](set-operations.png)
+
+ Source: https://www.learnbyexample.org/python-set/
+
+## B trees
+
+A sorted, balanced, tree structure typically used to access data on slow mediums such as disk or tape drives.
+
+**Some differences and similarities with binary trees:**
+* Binary trees can only have one value per node, but B-trees can have multiple values per node.
+* Binary trees can only have two children, but B-trees can have more than two. In fact, B trees always have n+1 children, where n is the number of values in the node. So **nodes will always have one more child than values**.
+* As in binary trees, smaller values are in the right and larger values in the left.
+
+### Minimal degree "T"
+
+The minimum number of children that every non-root node must have. Also known as: Minimization factor, Factor, Degree, Order of the tree
+
+### Definitions
+
+* **Minimal node:** An non-root node that has `T-1` values and `T` children.
+* **Full node:** A node that has `2T-1` values and `2T` children.
+* **Height**: The number of edges between the root and the leaf nodes. **
+
+### Properties [TODO REVIEW]
+
+* `T`: Every non-root nodes (non-root, non-leaf) must contain at least T (minimal degree) children.
+* `T-1`: Every non-root node will have at least `T-1` values.
+* `2T-1`: Every non-root node will have at most `2T-1` values.
+* All B-tree leaf nodes must have the same height.
+* Leaf nodes are stored in order from lower to higher, right to left.
+
+### Examples
+
+Good btree. 
+
+![btrees-example-1](btrees-example-1.png)
+
+Bad btree, as it violates the rule that says that every non-root node must have at least T-1 values.
+
+![btrees-example-2](btrees-example-2.png)
+
+Bad btree, as it violates the rule that says that every non-root node must have at most 2T-1 values.
+
+![btrees-example-3](btrees-example-3.png)
+
+Bad btree, as it violates the same height for every leaf node rule.
+
+![btrees-example-4](btrees-example-4.png)
+
+### Searching in a B tree
+
+Searching node values can be performed using binary search, which leads to `O(log(n))` complexity.
+
+### Adding items in a B tree
+
+**Rules:**
+* Values can only be added to leaf nodes.
+* Full nodes are split before the insertion algorithm enters them (ensuring leaf nodes are never full before adding an item)
+
+**Definitions:**
+**Root node splitting:** Splitting two child nodes out of the root node to prevent the root node from exceeding the maximum number of values allowed by the B-tree degree.
+**Node splitting:** Splitting a child value in half by pulling the middle value up to the parent.
+
+**Situations**
+NORMAL ADD
+Root node is full TODO EXPLAIN
+Leaf node is full TODO EXPLAIN
+
+
+### Removing items in a B tree
+**Rules:**
+* Values can only be removed from leaf nodes.
+* Ensure that all nodes visited during the remove process have at least T values before entering them.
+
+**Push down:** Merging two child nodes by pushing a parent value between them
+**Push down minimal root:** When the root has a single value and two minimal children, they can be combined with it to form a full root node.
+**Rotation:** Rotating a value from a non-minimal child, to a sibling minimal child.
+
+Pushing down: Used when removing a value would leave a child node with too few values, the parent has multiple values, and the sum of the adjacent child and the current child is less than 2T-1
+Rotation: Used when removing a node and pushing down would not work because the parent has too few values, but a sibling has a value to spare.
+Splitting nodes: Used when a node and the destination node would have too many values.
