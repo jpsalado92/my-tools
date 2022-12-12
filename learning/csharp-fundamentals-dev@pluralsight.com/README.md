@@ -167,3 +167,7 @@ Events in C# are build on top of what is known as **delegates**.
 Events are useful when there are components of our application that need to know when some others are modified/updated. 
 
 TODO WRITE AN EVENT
+
+TODO ABSTRACT
+
+TODO INTERFACES
