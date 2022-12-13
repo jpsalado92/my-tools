@@ -1,12 +1,12 @@
 # Solving [Natas@overthewire.org](https://overthewire.org/wargames/natas/)
 
 ## Intro
+
 Natas teaches the basics of serverside web-security.
 
 Each level of natas consists of its own website located at http://natasX.natas.labs.overthewire.org, where X is the level number. There is no SSH login. To access a level, enter the username for that level (e.g. natas0 for level 0) and its password.
 
 Each level has access to the password of the next level. Your job is to somehow obtain that next password and level up. All passwords are also stored in /etc/natas_webpass/. E.g. the password for natas5 is stored in the file /etc/natas_webpass/natas5 and only readable by natas4 and natas5.
-
 
 ## [Level 0](http://natas0.natas.labs.overthewire.org)
 
@@ -15,8 +15,9 @@ Username: natas0
 Password: natas0
 ```
 
-**Solution:** Visit source code of the webpage and look for the password there.
+### Solution
 
+Visit source code of the webpage and look for the password there.
 
 ## [Level 1](http://natas1.natas.labs.overthewire.org)
 
@@ -25,7 +26,9 @@ Username: natas1
 Password: g9D9cREhslqBKtcA2uocGHPfMZVzeFK6
 ```
 
-**Solution:** Same as before, but accessing web source code through, for example, f12.
+### Solution
+
+Same as before, but accessing web source code through, for example, f12.
 
 ## [Level 2](http://natas2.natas.labs.overthewire.org)
 
@@ -34,7 +37,8 @@ Username: natas2
 Password: h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
 ```
 
-**Solution:**:
+### Solution
+
 1. Check source code of webpage.
 2. Notice a suspicious pixel.png element.
 3. Notice that there is an accessible `file` directory open in which the pixel file is located.
@@ -43,8 +47,30 @@ Password: h4ubbcXrWqsTo7GGnnUMLppXbOogfBZ7
 ## [Level 3](http://natas3.natas.labs.overthewire.org)
 
 ```
-Username: natas2
+Username: natas3
 Password: G6ctbMJ5Nb4cbFwhpMPSvxGHhQ7I6W8Q
 ```
 
-**Solution:**:
+### Solution
+
+The website appears empty.
+
+After checking several URLs like `/files/` (as in the previous level) and `sitemap` , we find something at `http://natas3.natas.labs.overthewire.org/robots.txt` .
+
+According to https://seocrawl.com/, Robots.txt is a special file known to SEOs (and programmers as well) which provides useful directives to search engine crawlers.
+
+The content:
+
+```
+User-agent: *
+Disallow: /s3cr3t/
+```
+
+The "Disallow" prevents search engines from accessing the `/s3cr3t/` directory, which is were the password for the next level is stored.
+
+## [Level 4](http://natas4.natas.labs.overthewire.org)
+
+```
+Username: natas4
+Password: tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
+```
