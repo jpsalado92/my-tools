@@ -74,3 +74,35 @@ The "Disallow" prevents search engines from accessing the `/s3cr3t/` directory, 
 Username: natas4
 Password: tKOcJIbzM4lTs8hbCmzn5Zr4434fGZQm
 ```
+
+### Solution
+
+The password for the next level is retrieved if the page is visited from `http://natas5.natas.labs.overthewire.org` .
+
+In order to trick the server, we can add a `Referer` header to the request with the value `http://natas5.natas.labs.overthewire.org` .
+
+#referer-spoofing
+
+### Key takeaways
+
+* The `Referer` HTTP request header contains the absolute or partial address from which a resource has been requested. The Referer header allows a server to identify referring pages that people are visiting from or where requested resources are being used. This data can be used for analytics, logging, optimized caching, and more.
+
+**Source**: https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Referer
+
+## [Level 5](http://natas5.natas.labs.overthewire.org)
+
+```
+Username: natas5
+Password: Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
+```
+
+### Solution
+
+Among the different headers for the request there is one that says `Cookie` , which is set to `0`. Guess what will happen if we include a header with the same header set to `1`...
+
+## [Level 6](http://natas6.natas.labs.overthewire.org)
+
+```
+Username: natas6
+Password: fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR
+```
