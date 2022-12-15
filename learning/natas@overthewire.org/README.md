@@ -98,11 +98,47 @@ Password: Z0NsrtIkJoKALBCLi5eqFfcRN82Au2oD
 
 ### Solution
 
-Among the different headers for the request there is one that says `Cookie` , which is set to `0`. Guess what will happen if we include a header with the same header set to `1`...
+Among the different headers for the request there is one that says `Cookie` , which is set to `0` . Guess what will happen if we include a header with the same header set to `1` ...
 
 ## [Level 6](http://natas6.natas.labs.overthewire.org)
 
 ```
 Username: natas6
 Password: fOIvE0MDtPTgRhqmmvvAOt2EfXR6uQgR
+```
+
+### Solution
+
+Consulting "View sourcecode" link, we can notice the secret comes from `includes/secret.inc` . Getting into http://natas6.natas.labs.overthewire.org/includes/secret.inc we will find the password for the form, which will throw the password for the next level.
+
+## [Level 7](http://natas7.natas.labs.overthewire.org)
+
+```
+Username: natas7
+Password: jmxSiH3SP6Sonf8dv66ng8v1cIEdjXWr
+```
+
+### Solution
+
+According to the links provided, there is an endpoint accepting the `page` parameter that will allow us to get into different resources. Passing a random value to this parameter like `test` throws:
+
+```
+Warning: include(test): failed to open stream: No such file or directory in /var/www/natas/natas7/index.php on line 21
+
+Warning: include(): Failed opening 'test' for inclusion (include_path='.:/usr/share/php') in /var/www/natas/natas7/index.php on line 21
+```
+
+Also, the source code of the level itself says:
+
+```
+<!-- hint: password for webuser natas8 is in /etc/natas_webpass/natas8 -->
+```
+
+If we pass that path in the parameter, we get the password for the next level.
+
+## [Level 8](http://natas8.natas.labs.overthewire.org)
+
+```
+Username: natas8
+Password: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
 ```
