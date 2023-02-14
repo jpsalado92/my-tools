@@ -382,7 +382,41 @@ The password for natas12 is YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
 
 ## [Level 12](http://natas12.natas.labs.overthewire.org)
 
-```
+```text
 Username: natas12
 Password: YWqo0pjpcXzSIl5NMAVxg12QxeC1w9QG
 ```
+
+**Scenario:**
+
+We get a prompt that says "Choose a JPEG to upload" and some buttons to choose a field and upload it. "View sourcecode" leads us to a php script where we can check the scripts that tell how those buttons behave.
+
+**Exploration:**
+
+Getting into the source code we can see how these buttons are set. There are some **interesting hidden inputs** that we might be able to tweak later.
+
+```html
+<form enctype="multipart/form-data" action="index.php" method="POST">
+    <input type="hidden" name="MAX_FILE_SIZE" value="1000" />
+    <input type="hidden" name="filename" value="<?php print genRandomString(); ?>.jpg" />
+    Choose a JPEG to upload (max 1KB):<br />
+    <input name="uploadedfile" type="file" /><br />
+    <input type="submit" value="Upload File" />
+</form>
+```
+
+There is also some php code provided, and the most interesting part belongs to the `makeRandomPath` , which might have a security issue as we might be able to get any commands we want to run through the `$ext` variable.
+
+```php
+function makeRandomPath($dir, $ext) {
+
+    do {
+    $path = $dir."/".genRandomString().".".$ext;
+    } while(file_exists($path));
+    return $path;
+}
+```
+
+**Solution:**
+
+Given that we are able to get anything inside the `$ext` variable just by using the hidden input `filename` , we will try to reach the password for the next level stored under `/etc/natas_webpass/natas13` (as the challenge description mentions in the beginning).
