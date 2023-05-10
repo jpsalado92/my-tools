@@ -1,4 +1,4 @@
-Placeholder: https://doc.rust-lang.org/book/ch03-00-common-programming-concepts.html
+Placeholder: https://doc.rust-lang.org/book/ch03-02-data-types.html#data-types
 
 Check if rust is installed.
 
@@ -37,3 +37,24 @@ $ cargo check
 // Building for Release. (This command will create an executable in target/release instead of target/debug.)
 $ cargo build --release
 ```
+
+## Concepts
+
+Variables:
+* You declare them using `let`.
+* They are immutable by default (once a value is bound to a name, you can’t change that value)
+* You can make them mutable using `let mut`.
+* Example: `let x = 3;` or `let mut x = 3;`
+
+Constants:
+* They are always immutable.
+* You declare them using the `const`.
+* The type of the value must be annotated.
+* Constants can be declared in any scope, including the global scope
+* May be set only to a constant expression.
+* Example: `const THREE_HOURS_IN_SECONDS: u32 = 60 * 60 * 3;`
+* Convention for constants is to use all uppercase with underscores between words.
+
+## Useful resources
+
+[Rust reserved keywords](https://doc.rust-lang.org/book/appendix-01-keywords.html)
