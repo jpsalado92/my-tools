@@ -1,4 +1,4 @@
-Placeholder: https://doc.rust-lang.org/book/ch03-04-comments.html
+Placeholder: https://doc.rust-lang.org/book/ch04-00-understanding-ownership.html
 
 Check if rust is installed.
 
